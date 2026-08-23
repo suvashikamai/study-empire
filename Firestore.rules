@@ -1,0 +1,88 @@
+rules_version = '2';
+
+// Study Empire security rules.
+// Paste this whole file into: Firebase console -> Firestore Database -> Rules -> Publish.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+
+    // Username registry: claim once, never steal.
+    match /usernames/{username} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+                    && request.resource.data.uid == request.auth.uid
+                    && username.size() >= 3 && username.size() <= 20;
+      allow update, delete: if false;
+    }
+
+    // Public stats + city snapshot. Readable by any signed-in user; only the
+    // owner can write, and the obvious nonsense is rejected.
+    match /publicProfiles/{uid} {
+      allow read: if signedIn();
+      allow write: if isOwner(uid)
+                   && request.resource.data.uid == uid
+                   && request.resource.data.xp is number
+                   && request.resource.data.xp >= 0
+                   && request.resource.data.minutes is number
+                   && request.resource.data.minutes >= 0;
+    }
+
+    // Friend requests: only the two people involved can see or change one.
+    match /friendRequests/{reqId} {
+      allow read: if signedIn() && request.auth.uid in resource.data.participants;
+      allow create: if signedIn()
+                    && request.resource.data.fromUid == request.auth.uid
+                    && request.auth.uid in request.resource.data.participants
+                    && request.resource.data.participants.size() == 2
+                    && request.resource.data.status == 'pending';
+      allow update: if signedIn()
+                    && request.auth.uid in resource.data.participants
+                    && request.resource.data.participants == resource.data.participants
+                    && request.resource.data.fromUid == resource.data.fromUid
+                    && request.resource.data.toUid == resource.data.toUid;
+      allow delete: if false;
+    }
+
+    match /users/{uid} {
+      allow read, write: if isOwner(uid);
+
+      // Accepting a request writes one document into the other person's list.
+      // That document's id must be the writer's own uid.
+      match /friends/{friendUid} {
+        allow read: if isOwner(uid);
+        allow create: if isOwner(uid)
+                      || (signedIn() && request.auth.uid == friendUid
+                          && request.resource.data.uid == friendUid);
+        allow update: if isOwner(uid);
+        allow delete: if isOwner(uid) || (signedIn() && request.auth.uid == friendUid);
+      }
+
+      // Study history is append-only and sanity-checked.
+      match /sessions/{sessionId} {
+        allow read: if isOwner(uid);
+        allow create: if isOwner(uid)
+                      && request.resource.data.minutes is number
+                      && request.resource.data.minutes >= 0
+                      && request.resource.data.minutes <= 480
+                      && request.resource.data.breakMin is number
+                      && request.resource.data.breakMin >= 0
+                      && request.resource.data.xp is number
+                      && request.resource.data.xp >= 0
+                      && request.resource.data.xp <= 20000
+                      && request.resource.data.startedAt <= request.time.toMillis() + 60000;
+        allow update, delete: if false;
+      }
+
+      // Listed one by one on purpose: a recursive wildcard here would re-open
+      // the append-only sessions rule above.
+      match /empire/{docId}   { allow read, write: if isOwner(uid); }
+      match /subjects/{docId} { allow read, write: if isOwner(uid); }
+      match /schedule/{docId} { allow read, write: if isOwner(uid); }
+      match /exams/{docId}    { allow read, write: if isOwner(uid); }
+      match /meta/{docId}     { allow read, write: if isOwner(uid); }
+    }
+  }
+}
