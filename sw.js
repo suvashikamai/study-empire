@@ -2,10 +2,9 @@
    Network-first so edits you make on GitHub show up the next time the phone is
    online, with a cache fallback so the app still opens with no signal. */
 
-const CACHE = 'study-empire-v1';
+const CACHE = 'study-empire-v3';
 const ASSETS = [
-  './', './index.html', './manifest.webmanifest',
-  './icon-192.png', './icon-512.png', './icon-512-maskable.png'
+  './', './index.html', './manifest.webmanifest', './icon.svg'
 ];
 
 self.addEventListener('install', (e) => {
