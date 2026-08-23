@@ -6,17 +6,18 @@
 <meta name="theme-color" content="#0b0b0f">
 <title>Study Empire</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Study Empire">
 <style>
 :root{
-  --bg:#08080b; --p900:#0b0b0f; --p850:#121218; --p800:#17171f; --p700:#20202a;
-  --p600:#2b2b38; --p500:#3a3a4a;
-  --acc:#39d98a; --acc2:#1fae6b; --gold:#f5c451; --dan:#ef5a6f; --info:#5aa9ef;
-  --t:#ffffff; --t2:rgba(255,255,255,.55); --t3:rgba(255,255,255,.35);
+  --bg:#050506; --p900:#0a0a0c; --p850:#121216; --p800:#17171c; --p700:#232329;
+  --p600:#2e2e36; --p500:#3d3d47;
+  --acc:#3ee089; --acc2:#22b26a; --gold:#f6c85a; --dan:#f2617a; --info:#5fb0f5;
+  --t:#ffffff; --t2:rgba(255,255,255,.66); --t3:rgba(255,255,255,.42);
+  --r-lg:20px; --r-md:14px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
@@ -24,129 +25,142 @@ body{
   background:var(--bg);color:var(--t);
   font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   font-size:16px;line-height:1.5;overscroll-behavior-y:none;
+  -webkit-font-smoothing:antialiased;
 }
 #app{min-height:100%;display:flex;flex-direction:column}
 button{font:inherit;color:inherit;border:none;background:none;cursor:pointer}
 input,select,textarea{
   font:inherit;color:var(--t);background:var(--p800);border:1px solid var(--p600);
-  border-radius:12px;padding:10px 12px;width:100%;outline:none
+  border-radius:12px;padding:12px 14px;width:100%;outline:none
 }
 input:focus,select:focus{border-color:var(--acc)}
 a{color:var(--acc);text-decoration:none}
 
-/* layout */
+/* ---- shell ---- */
 .hdr{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;
-  gap:8px;padding:12px 16px;background:rgba(11,11,15,.94);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--p800)}
-.hdr-brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px}
-.avatar{width:32px;height:32px;border-radius:50%;background:var(--p700);display:grid;place-items:center;
-  font-weight:700;font-size:12px}
-main{flex:1;padding:16px 16px 96px;max-width:720px;width:100%;margin:0 auto}
-.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;background:rgba(11,11,15,.97);
-  backdrop-filter:blur(8px);border-top:1px solid var(--p800);
-  padding:6px 4px calc(env(safe-area-inset-bottom,0px) + 6px)}
-.nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;
-  font-size:10px;font-weight:600;color:var(--t3)}
-.nav a.on{color:var(--acc)}
-.nav i{font-style:normal;font-size:19px;line-height:1}
+  gap:8px;padding:14px 18px;background:linear-gradient(180deg,rgba(5,5,6,.97),rgba(5,5,6,.82));
+  backdrop-filter:blur(12px)}
+.hdr-brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:15px;letter-spacing:-.02em}
+.avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#3ee089,#1c7a4c);
+  display:grid;place-items:center;font-weight:800;font-size:13px;color:#04140b}
+main{flex:1;padding:6px 18px 110px;max-width:760px;width:100%;margin:0 auto}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;
+  background:linear-gradient(180deg,rgba(10,10,12,.72),rgba(5,5,6,.99) 42%);
+  backdrop-filter:blur(14px);padding:8px 6px calc(env(safe-area-inset-bottom,0px) + 8px)}
+.nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 2px;
+  font-size:10px;font-weight:700;letter-spacing:.02em;color:var(--t3);transition:color .18s}
+.nav a.on{color:var(--t)}
+.nav i{font-style:normal;font-size:20px;line-height:1;filter:grayscale(1) opacity(.7);transition:filter .18s}
+.nav a.on i{filter:none}
 
-/* bits */
-.card{background:var(--p850);border:1px solid var(--p700);border-radius:18px;padding:16px;
-  box-shadow:0 10px 30px -14px rgba(0,0,0,.8)}
-.card+.card{margin-top:10px}
-.sec{margin-top:26px}
-.sec:first-child{margin-top:0}
-.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-h1{font-size:24px;font-weight:800;letter-spacing:-.02em;margin:0}
-h2{font-size:17px;font-weight:700;margin:0}
-h3{font-size:14px;font-weight:700;margin:0}
+/* ---- type ---- */
+h1{font-size:30px;font-weight:800;letter-spacing:-.035em;margin:0;line-height:1.1}
+h2{font-size:20px;font-weight:800;letter-spacing:-.025em;margin:0}
+h3{font-size:15px;font-weight:700;letter-spacing:-.01em;margin:0}
 .mut{color:var(--t2)}.dim{color:var(--t3)}
-.xs{font-size:12px}.sm{font-size:13px}.lg{font-size:20px;font-weight:800}
-.lab{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3)}
-.row{display:flex;align-items:center;gap:10px}
+.xs{font-size:12px}.sm{font-size:13.5px}
+.lg{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.lab{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--t3)}
+.row{display:flex;align-items:center;gap:12px}
 .grow{flex:1;min-width:0}
 .trunc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .stack{display:flex;flex-direction:column;gap:10px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-@media(min-width:560px){.grid4{grid-template-columns:repeat(4,1fr)}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:600px){.grid4{grid-template-columns:repeat(4,1fr)}}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:999px;
-  padding:11px 18px;font-size:14px;font-weight:700;transition:transform .1s}
-.btn:active{transform:scale(.97)}
+/* ---- surfaces ---- */
+.card{background:var(--p850);border-radius:var(--r-lg);padding:18px}
+.card+.card{margin-top:12px}
+.sec{margin-top:32px}
+.sec:first-child{margin-top:0}
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+
+/* ---- controls ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:999px;
+  padding:13px 22px;font-size:14.5px;font-weight:800;letter-spacing:-.01em;
+  transition:transform .12s,filter .18s}
+.btn:active{transform:scale(.96)}
 .btn[disabled]{opacity:.4}
-.pri{background:var(--acc);color:#08120c}
+.pri{background:var(--acc);color:#04140b}
+.pri:hover{filter:brightness(1.08)}
 .gho{background:var(--p700);color:var(--t)}
-.dng{background:rgba(239,90,111,.15);color:var(--dan)}
-.small{padding:7px 13px;font-size:12.5px}
+.dng{background:rgba(242,97,122,.16);color:var(--dan)}
+.small{padding:8px 15px;font-size:12.5px}
 .full{width:100%}
 
-.bar{height:8px;border-radius:999px;background:var(--p700);overflow:hidden}
-.bar>i{display:block;height:100%;border-radius:999px;background:var(--acc);transition:width .5s}
-.pill{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px 10px;
-  font-size:11px;font-weight:700;background:var(--p700);color:var(--t2)}
-.pill.good{background:rgba(57,217,138,.15);color:var(--acc)}
-.pill.warn{background:rgba(245,196,81,.15);color:var(--gold)}
-.pill.bad{background:rgba(239,90,111,.15);color:var(--dan)}
+.bar{height:7px;border-radius:999px;background:var(--p700);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:999px;background:var(--acc);transition:width .6s cubic-bezier(.2,.7,.3,1)}
+.pill{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px 11px;
+  font-size:11px;font-weight:800;letter-spacing:.02em;background:var(--p700);color:var(--t2)}
+.pill.good{background:rgba(62,224,137,.16);color:var(--acc)}
+.pill.warn{background:rgba(246,200,90,.16);color:var(--gold)}
+.pill.bad{background:rgba(242,97,122,.16);color:var(--dan)}
 
-.hero{border-radius:18px;overflow:hidden;border:1px solid var(--p700)}
-.hero-t{padding:18px;background:linear-gradient(140deg,rgba(57,217,138,.24),var(--p800) 55%,var(--p850))}
-.hero-b{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--p700)}
-@media(min-width:560px){.hero-b{grid-template-columns:repeat(4,1fr)}}
-.hero-b>div{background:var(--p850);padding:11px 13px}
+/* ---- hero ---- */
+.hero{border-radius:var(--r-lg);overflow:hidden}
+.hero-t{padding:22px 20px 20px;background:linear-gradient(160deg,rgba(62,224,137,.30),rgba(34,120,90,.18) 42%,var(--p850) 88%)}
+.hero-b{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--p800)}
+@media(min-width:600px){.hero-b{grid-template-columns:repeat(4,1fr)}}
+.hero-b>div{background:var(--p850);padding:13px 15px}
 
-.empty{background:var(--p850);border:1px solid var(--p700);border-radius:18px;padding:30px 20px;
-  text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
-.empty .ic{font-size:34px}
+/* cover-art style thumbnail */
+.thumb{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;font-size:23px;
+  flex:none;box-shadow:0 8px 18px -10px rgba(0,0,0,.9)}
+.thumb.lgx{width:76px;height:76px;border-radius:16px;font-size:34px}
 
-.sheet-bg{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);backdrop-filter:blur(3px);
+.empty{background:var(--p850);border-radius:var(--r-lg);padding:34px 22px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:10px}
+.empty .ic{font-size:38px}
+
+.sheet-bg{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.78);backdrop-filter:blur(4px);
   display:flex;align-items:flex-end;justify-content:center}
-@media(min-width:560px){.sheet-bg{align-items:center}}
+@media(min-width:600px){.sheet-bg{align-items:center}}
 .scrim{position:absolute;inset:0}
-.sheet{position:relative;z-index:1;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;
-  background:var(--p850);border:1px solid var(--p700);border-radius:22px 22px 0 0;padding:18px}
-@media(min-width:560px){.sheet{border-radius:22px}}
-.sheet-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sheet{position:relative;z-index:1;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;
+  background:var(--p850);border-radius:24px 24px 0 0;padding:22px 20px calc(env(safe-area-inset-bottom,0px) + 22px)}
+@media(min-width:600px){.sheet{border-radius:24px;padding-bottom:22px}}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 
-.list-row{display:flex;align-items:center;gap:10px;background:var(--p850);border:1px solid var(--p700);
-  border-radius:14px;padding:11px 12px}
-.tick{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--p500);display:grid;
-  place-items:center;font-size:13px;flex:none;background:transparent;padding:0}
-.tick.on{background:var(--acc);border-color:var(--acc);color:#08120c}
+.list-row{display:flex;align-items:center;gap:12px;background:var(--p850);border-radius:var(--r-md);
+  padding:12px 14px}
+.tick{width:27px;height:27px;border-radius:9px;border:1.6px solid var(--p500);display:grid;
+  place-items:center;font-size:13px;flex:none;background:transparent;padding:0;transition:background .15s}
+.tick.on{background:var(--acc);border-color:var(--acc);color:#04140b}
 .chip{display:inline-block;border-radius:999px;border:1px solid var(--p600);color:var(--t2);
-  padding:7px 13px;font-size:12.5px;font-weight:600;background:transparent}
-.chip.on{border-color:var(--acc);background:rgba(57,217,138,.1);color:var(--acc)}
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.scroll-x{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  padding:9px 16px;font-size:13px;font-weight:700;background:transparent;white-space:nowrap;transition:all .15s}
+.chip.on{border-color:var(--acc);background:rgba(62,224,137,.13);color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.scroll-x{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none}
 .scroll-x::-webkit-scrollbar{display:none}
 
-/* city */
-.city-wrap{position:relative;border:1px solid var(--p700);border-radius:18px;overflow:hidden;background:var(--p900)}
-#city{display:block;width:100%;height:52vh;min-height:300px;touch-action:none;user-select:none}
-.hud{position:absolute;left:0;right:0;display:flex;justify-content:space-between;padding:10px;
+/* ---- city ---- */
+.city-wrap{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--p900)}
+#city{display:block;width:100%;height:56vh;min-height:320px;touch-action:none;user-select:none}
+.hud{position:absolute;left:0;right:0;display:flex;justify-content:space-between;padding:12px;
   pointer-events:none;gap:8px}
 .hud.top{top:0}.hud.bot{bottom:0;align-items:flex-end}
 .hud .box,.hud button{pointer-events:auto}
-.hud .box{background:rgba(8,8,11,.78);border-radius:12px;padding:8px 11px;backdrop-filter:blur(6px);
-  pointer-events:auto}
+.hud .box{background:rgba(5,5,6,.72);border-radius:14px;padding:10px 13px;backdrop-filter:blur(10px)}
 .hud .box.r{text-align:right}
 
-/* focus */
-.focus{display:flex;flex-direction:column;align-items:center;gap:18px;padding:24px 0;text-align:center}
-.ring{position:relative;width:250px;height:250px}
+/* ---- focus ---- */
+.focus{display:flex;flex-direction:column;align-items:center;gap:22px;padding:26px 0;text-align:center}
+.ring{position:relative;width:264px;height:264px}
 .ring svg{transform:rotate(-90deg)}
 .ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.clock{font-size:46px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.clock{font-size:52px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.045em}
 
-.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);z-index:70;
-  background:var(--p700);color:var(--t);border-radius:999px;padding:10px 18px;font-size:13px;
-  font-weight:600;box-shadow:0 10px 30px -8px #000;max-width:90vw;text-align:center}
-.spin{width:30px;height:30px;border-radius:50%;border:2px solid var(--p600);border-top-color:var(--acc);
-  animation:sp 1s linear infinite;margin:60px auto}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:70;
+  background:var(--p700);color:var(--t);border-radius:999px;padding:12px 20px;font-size:13.5px;
+  font-weight:700;box-shadow:0 14px 34px -10px #000;max-width:92vw;text-align:center}
+.spin{width:32px;height:32px;border-radius:50%;border:2.5px solid var(--p600);border-top-color:var(--acc);
+  animation:sp 1s linear infinite;margin:70px auto}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.center-page{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 16px}
-.auth{width:100%;max-width:380px}
+.center-page{flex:1;display:flex;align-items:center;justify-content:center;padding:26px 18px}
+.auth{width:100%;max-width:400px}
 </style>
 </head>
 <body>
@@ -162,12 +176,12 @@ h3{font-size:14px;font-weight:700;margin:0}
    ========================================================================== */
 
 const FIREBASE = {
-  apiKey: "AIzaSyBCQ11-bdL3E0BgmtHUrEv04tH1x84xblM",
-  authDomain: "study-empire-bb4f8.firebaseapp.com",
-  projectId: "study-empire-bb4f8",
-  storageBucket: "study-empire-bb4f8.firebasestorage.app",
-  messagingSenderId: "1073828388393",
-  appId: "1:1073828388393:web:0bd111378779e8229b8638"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 /* ---------------------------------------------------------------- helpers */
@@ -277,6 +291,12 @@ const BUILDINGS = [
   { id: 'solar_farm', name: 'Solar Farm', cat: 'Infrastructure', icon: '🔆', fp: 2, th: 8, cost: 7000, growth: 1.65, h: 0.35, hpl: 0.05, sil: 'open', pal: P('#3f4a63', '#2f3850', '#25304a', '#7fb7ff'), pop: 18, names: ['Solar Array', 'Solar Farm', 'Solar Field', 'Photonic Field'], desc: 'Clean power for a clean streak.' },
   { id: 'airport', name: 'Airport', cat: 'Transport', icon: '✈️', fp: 3, th: 8, cost: 9000, growth: 1.75, h: 0.9, hpl: 0.2, sil: 'hangar', pal: P('#dfe3e8', '#b8bcc2', '#5d6570', '#7fd4ff'), pop: 120, unique: 1, names: ['Airstrip', 'Airport', 'International Airport', 'Air Hub', 'Orbital Port'], desc: 'Planes start crossing your skyline.' },
   { id: 'palace', name: 'Palace', cat: 'Landmark', icon: '🏰', fp: 3, th: 9, cost: 14000, growth: 1.8, h: 2.4, hpl: 0.55, sil: 'spired', pal: P('#f2e8d5', '#d0c6b2', '#b8863b', '#ffd977'), pop: 100, unique: 1, names: ['Manor', 'Palace', 'Royal Palace', 'Grand Palace', 'Imperial Palace'], desc: 'Endgame landmark. Requires serious hours.' },
+  { id: 'market', name: 'Market', cat: 'Commerce', icon: '🛒', fp: 2, th: 2, cost: 340, growth: 1.5, h: 0.9, hpl: 0.2, sil: 'hangar', pal: P('#e8c9a0', '#c4a684', '#b4553f', '#ffe6b0'), pop: 18, names: ['Street Market', 'Covered Market', 'Grand Bazaar', 'Trade Halls'], desc: 'Stalls, awnings and noise. Cheap early commerce.' },
+  { id: 'police', name: 'Police Station', cat: 'Civic', icon: '🚓', fp: 2, th: 3, cost: 620, growth: 1.55, h: 1.4, hpl: 0.3, sil: 'block', pal: P('#c2cad6', '#9aa3b0', '#33507a', '#7fb2ff'), pop: 20, names: ['Police Post', 'Police Station', 'Central Precinct', 'Metro HQ'], desc: 'Blue lights sweep the street at night.' },
+  { id: 'fire', name: 'Fire Station', cat: 'Civic', icon: '🚒', fp: 2, th: 3, cost: 640, growth: 1.55, h: 1.3, hpl: 0.3, sil: 'hangar', pal: P('#d96a5a', '#b35044', '#7a2f27', '#ffd08a'), pop: 18, names: ['Fire Post', 'Fire Station', 'Fire & Rescue', 'Rescue Command'], desc: 'Keeps your city standing. Red and unmistakable.' },
+  { id: 'theatre', name: 'Theatre', cat: 'Leisure', icon: '🎭', fp: 2, th: 4, cost: 1400, growth: 1.62, h: 1.7, hpl: 0.35, sil: 'spired', pal: P('#e6d3e0', '#c1abbb', '#7b3f63', '#ffd45e'), pop: 32, names: ['Playhouse', 'Theatre', 'Opera House', 'Grand Opera'], desc: 'Lit marquee, queues outside on a good evening.' },
+  { id: 'bank', name: 'Bank', cat: 'Commerce', icon: '🏦', fp: 1, th: 4, cost: 900, growth: 1.6, h: 1.5, hpl: 0.35, sil: 'domed', pal: P('#ded9c8', '#b8b3a2', '#4f6b52', '#f0d98a'), pop: 16, names: ['Counting House', 'Bank', 'Central Bank', 'Reserve'], desc: 'Columns, marble, and very good locks.' },
+  { id: 'hotel', name: 'Hotel', cat: 'Commerce', icon: '🏨', fp: 2, th: 5, cost: 2000, growth: 1.65, h: 2.2, hpl: 0.6, sil: 'block', pal: P('#d9b9a6', '#b39685', '#7a4a58', '#ffd9a0'), pop: 48, names: ['Guest House', 'Hotel', 'Grand Hotel', 'Sky Hotel'], desc: 'Every window lit at 2am, which feels about right.' },
   { id: 'observatory', name: 'Observatory', cat: 'Education', icon: '🔭', fp: 2, th: 10, cost: 18000, growth: 1.8, h: 2, hpl: 0.5, sil: 'domed', pal: P('#d5dbe6', '#aeb5c2', '#39415a', '#9ad8ff'), pop: 40, unique: 1, names: ['Observatory', 'Great Observatory', 'Deep Sky Array', 'Void Observatory'], desc: 'For the ones who kept the streak alive.' }
 ];
 const BT = Object.fromEntries(BUILDINGS.map((b) => [b.id, b]));
@@ -703,12 +723,44 @@ const ERA = {
 };
 const CARS = ['#e0574f', '#4f9de0', '#e8c14f', '#8fd06a', '#d0d3d8', '#b06ad0'];
 
+/* ---- seasons & weather -------------------------------------------------
+   Both are derived from the calendar and a per-day hash, so the city looks
+   different through the year and across days without any setting to fiddle. */
+const SEASONS = ['winter', 'spring', 'summer', 'autumn'];
+const WEATHER_LABEL = { clear: '☀️ Clear', rain: '🌧️ Raining', snow: '❄️ Snowing' };
+function seasonOf(d = new Date()) {
+  const m = d.getMonth();
+  if (m <= 1 || m === 11) return 'winter';
+  if (m <= 4) return 'spring';
+  if (m <= 8) return 'summer';
+  return 'autumn';
+}
+const SEASON_TREE = { winter: '#8fa8a0', spring: '#f2a8c8', summer: '#4f9e58', autumn: '#d98b3a' };
+const SEASON_GRASS = { winter: '#5d6f63', spring: '#48784a', summer: '#3c6b42', autumn: '#6a6a3c' };
+function weatherOf(seed) {
+  const r = makeRng(seed + ':' + toISO())();
+  const season = seasonOf();
+  if (season === 'winter' && r > 0.55) return 'snow';
+  if (r > 0.72) return 'rain';
+  return 'clear';
+}
+const TERRAINS = {
+  valley: { label: 'Green Valley', grass: null, water: null },
+  coast: { label: 'Coast', grass: '#4d7a4a', water: '#1f6f8b' },
+  tundra: { label: 'Northern', grass: '#5f7268', water: '#2b5a73' },
+  desert: { label: 'Desert Oasis', grass: '#9a8a4f', water: '#227a86' }
+};
+
 class City {
   constructor(canvas, state) {
     this.c = canvas;
     this.ctx = canvas.getContext('2d');
     this.state = state;
     this.theme = ERA[thEra(state.th)];
+    this.season = seasonOf();
+    this.weather = weatherOf(state.seed);
+    this.terrain = state.terrain || 'valley';
+    this.drops = [];
     this.cam = { x: 0, y: 0, z: 1 };
     this.sel = null;
     this.t = 0;
@@ -723,6 +775,7 @@ class City {
     const changed = s.grid !== this.state.grid || s.th !== this.state.th;
     this.state = s;
     this.theme = ERA[thEra(s.th)];
+    this.terrain = s.terrain || this.terrain;
     if (changed) this.spawn();
   }
   centre() {
@@ -754,7 +807,29 @@ class City {
     });
     if (this.state.buildings.some((b) => b.type === 'railway_station' && !b.building))
       a.push({ axis: 'x', line: roads[Math.min(roads.length - 1, 2)], pos: 0, sp: 2.6, kind: 'train', col: '#c9d4e0', lane: 0.5 });
+    a.forEach((x) => { x.phase = rng() * 6.3; if (x.kind === 'npc' && rng() > 0.78) { x.jog = 1; x.sp *= 2.1; } });
+    // Boats drift along the river at the top of the map.
+    for (let i = 0; i < 3; i++) a.push({
+      axis: 'x', line: -1, pos: rng() * g, sp: (0.5 + rng() * 0.4) * (rng() > 0.5 ? 1 : -1),
+      kind: 'boat', col: i === 0 ? '#e2e6ea' : '#d9b892', lane: 0.4 + rng() * 1.6, phase: rng() * 6.3
+    });
     this.agents = a;
+
+    // Trees, bushes and rocks on whatever grass the buildings have not taken.
+    const taken = new Set();
+    this.state.buildings.forEach((b) => {
+      const f = bType(b.type).fp;
+      for (let dx = -1; dx <= f; dx++) for (let dy = -1; dy <= f; dy++) taken.add((b.x + dx) + ',' + (b.y + dy));
+    });
+    const decor = [];
+    const dr = makeRng(this.state.seed + ':decor:' + g);
+    for (let x = 0; x < g; x++) for (let y = 0; y < g; y++) {
+      if (isRoad(x, y) || isWater(x, y) || taken.has(x + ',' + y)) continue;
+      const r = dr();
+      if (r < 0.20) decor.push({ x: x + 0.2 + dr() * 0.6, y: y + 0.2 + dr() * 0.6, kind: 'tree', s: 0.8 + dr() * 0.5 });
+      else if (r < 0.30) decor.push({ x: x + 0.3 + dr() * 0.4, y: y + 0.3 + dr() * 0.4, kind: 'bush', s: 0.7 + dr() * 0.5 });
+    }
+    this.decor = decor;
   }
   start() {
     if (this.raf) return;
@@ -831,6 +906,7 @@ class City {
     this.scene();
     ctx.restore();
     this.plane(w);
+    this.drawWeather(w, h);
   }
   stars(w, h) {
     const ctx = this.ctx, rng = makeRng(this.state.seed + ':stars');
@@ -848,6 +924,59 @@ class City {
     ctx.lineTo(x - 10, y + 11); ctx.lineTo(x - 2, y + 6); ctx.lineTo(x + 4, y + 3);
     ctx.closePath(); ctx.fill(); ctx.restore();
   }
+  plant(d) {
+    const ctx = this.ctx, p = isoPt(d.x, d.y), baseY = TH_ / 2;
+    const cx = p.x, cy = p.y + baseY;
+    const sway = Math.sin(this.t * 1.4 + d.x + d.y) * (this.weather === 'rain' ? 1.6 : 0.6);
+    ctx.fillStyle = 'rgba(0,0,0,.24)';
+    ctx.beginPath(); ctx.ellipse(cx, cy, 6 * d.s, 2.6 * d.s, 0, 0, 6.284); ctx.fill();
+    if (d.kind === 'bush') {
+      ctx.fillStyle = this.tint(this.weather === 'snow' ? '#cfd8dc' : shade(SEASON_TREE[this.season], -0.25));
+      ctx.beginPath(); ctx.ellipse(cx + sway * 0.4, cy - 4 * d.s, 6 * d.s, 4.5 * d.s, 0, 0, 6.284); ctx.fill();
+      return;
+    }
+    const h = 13 * d.s;
+    ctx.strokeStyle = this.tint('#6b4a2b'); ctx.lineWidth = 2 * d.s;
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + sway * 0.5, cy - h); ctx.stroke();
+    const leaf = this.weather === 'snow' ? '#e8eef2' : SEASON_TREE[this.season];
+    ctx.fillStyle = this.tint(leaf);
+    ctx.beginPath(); ctx.arc(cx + sway, cy - h - 4 * d.s, 7.5 * d.s, 0, 6.284); ctx.fill();
+    ctx.fillStyle = this.tint(shade(leaf, -0.18));
+    ctx.beginPath(); ctx.arc(cx + sway - 4 * d.s, cy - h - 1 * d.s, 5 * d.s, 0, 6.284); ctx.fill();
+  }
+
+  drawWeather(w, h) {
+    if (this.weather === 'clear') return;
+    const ctx = this.ctx;
+    const want = this.weather === 'rain' ? 90 : 70;
+    while (this.drops.length < want) {
+      this.drops.push({ x: Math.random() * w, y: Math.random() * h, v: this.weather === 'rain' ? 480 + Math.random() * 260 : 40 + Math.random() * 40, o: 0.25 + Math.random() * 0.5, p: Math.random() * 6.3 });
+    }
+    ctx.save();
+    if (this.weather === 'rain') {
+      ctx.strokeStyle = 'rgba(190,215,240,.55)';
+      ctx.lineWidth = 1.1;
+      this.drops.forEach((d) => {
+        d.y += d.v / 60; d.x += 0.6;
+        if (d.y > h) { d.y = -12; d.x = Math.random() * w; }
+        ctx.globalAlpha = d.o;
+        ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x - 2, d.y + 11); ctx.stroke();
+      });
+    } else {
+      ctx.fillStyle = '#ffffff';
+      this.drops.forEach((d) => {
+        d.y += d.v / 60; d.x += Math.sin(this.t * 1.2 + d.p) * 0.5;
+        if (d.y > h) { d.y = -8; d.x = Math.random() * w; }
+        ctx.globalAlpha = d.o;
+        ctx.beginPath(); ctx.arc(d.x, d.y, 1.7, 0, 6.284); ctx.fill();
+      });
+    }
+    ctx.restore();
+    if (this.weather === 'rain') {
+      ctx.save(); ctx.fillStyle = 'rgba(30,45,70,.16)'; ctx.fillRect(0, 0, w, h); ctx.restore();
+    }
+  }
+
   diamond(x, y) {
     const ctx = this.ctx, p = isoPt(x, y);
     ctx.beginPath();
@@ -863,10 +992,15 @@ class City {
       for (let y = Math.max(0, v.y0); y <= Math.min(g - 1, v.y1); y++) {
         let fill;
         if (isWater(x, y)) {
+          const w0 = TERRAINS[this.terrain].water || this.theme.water;
           fill = isBridge(x, y) ? this.theme.bridge
-            : (Math.sin(this.t * 1.1 + (x + y) * 0.6) > 0 ? this.theme.water : this.theme.waterAlt);
-        } else if (isRoad(x, y)) fill = this.theme.road;
-        else fill = (x + y) % 2 === 0 ? this.theme.grass : this.theme.grassAlt;
+            : (Math.sin(this.t * 1.1 + (x + y) * 0.6) > 0 ? w0 : shade(w0, 0.09));
+        } else if (isRoad(x, y)) fill = this.weather === 'snow' ? '#7d8288' : this.theme.road;
+        else {
+          const base = TERRAINS[this.terrain].grass || SEASON_GRASS[this.season] || this.theme.grass;
+          fill = this.weather === 'snow' ? ((x + y) % 2 === 0 ? '#dfe6ec' : '#d2dae2')
+            : ((x + y) % 2 === 0 ? base : shade(base, -0.07));
+        }
         ctx.fillStyle = this.tint(fill);
         this.diamond(x, y); ctx.fill();
         if (isRoad(x, y) && !isWater(x, y) && (x % 4 === 0) !== (y % 4 === 0)) {
@@ -897,16 +1031,55 @@ class City {
       if (x < v.x0 || x > v.x1 || y < v.y0 || y > v.y1) return;
       items.push({ d: x + y + 0.5, fn: () => this.agent(a, x, y) });
     });
+    (this.decor || []).forEach((d) => {
+      if (d.x < v.x0 || d.x > v.x1 || d.y < v.y0 || d.y > v.y1) return;
+      items.push({ d: d.x + d.y, fn: () => this.plant(d) });
+    });
     items.sort((p, q) => p.d - q.d).forEach((i) => i.fn());
   }
   agent(a, x, y) {
     const ctx = this.ctx, p = isoPt(x, y), cx = p.x, cy = p.y + TH_ / 2;
-    ctx.fillStyle = 'rgba(0,0,0,.28)'; ctx.beginPath();
-    ctx.ellipse(cx, cy + 1, a.kind === 'npc' ? 3 : 7, a.kind === 'npc' ? 1.6 : 3.4, 0, 0, 6.284); ctx.fill();
+    if (a.kind !== 'boat') {
+      ctx.fillStyle = 'rgba(0,0,0,.28)'; ctx.beginPath();
+      ctx.ellipse(cx, cy + 1, a.kind === 'npc' ? 3 : 7, a.kind === 'npc' ? 1.6 : 3.4, 0, 0, 6.284); ctx.fill();
+    }
     if (a.kind === 'npc') {
+      // Walk cycle: the body bobs, the legs swing, joggers do both faster.
+      const rate = a.jog ? 11 : 6.5;
+      const swing = Math.sin(this.t * rate + (a.phase || 0));
+      const bob = Math.abs(swing) * (a.jog ? 1.6 : 0.9);
+      const top = cy - 8 - bob;
+      ctx.strokeStyle = this.tint('#2b2f36');
+      ctx.lineWidth = 1.3;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 2.5); ctx.lineTo(cx + swing * 2.2, cy);
+      ctx.moveTo(cx, cy - 2.5); ctx.lineTo(cx - swing * 2.2, cy);
+      ctx.stroke();
       ctx.fillStyle = this.tint(a.col);
-      ctx.fillRect(cx - 1.6, cy - 8, 3.2, 6);
-      ctx.beginPath(); ctx.arc(cx, cy - 9.5, 2, 0, 6.284); ctx.fill();
+      ctx.fillRect(cx - 1.7, top, 3.4, 6.2);
+      if (a.jog) {
+        ctx.beginPath();
+        ctx.moveTo(cx, top + 1.5); ctx.lineTo(cx + swing * 2.6, top + 4);
+        ctx.strokeStyle = this.tint(a.col); ctx.lineWidth = 1.3; ctx.stroke();
+      }
+      ctx.fillStyle = this.tint('#e8c9a8');
+      ctx.beginPath(); ctx.arc(cx, top - 1.6, 2, 0, 6.284); ctx.fill();
+    } else if (a.kind === 'boat') {
+      const rock = Math.sin(this.t * 1.6 + (a.phase || 0)) * 1.4;
+      ctx.save();
+      ctx.translate(cx, cy - 2 + rock * 0.4);
+      ctx.rotate(rock * 0.02);
+      ctx.fillStyle = this.tint(a.col);
+      ctx.beginPath();
+      ctx.moveTo(-13, 0); ctx.quadraticCurveTo(0, 6, 13, 0); ctx.lineTo(9, -3.5); ctx.lineTo(-9, -3.5);
+      ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = this.tint('#8a6a44'); ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(0, -3.5); ctx.lineTo(0, -15); ctx.stroke();
+      ctx.fillStyle = this.tint('#f2f4f6');
+      ctx.beginPath(); ctx.moveTo(1, -15); ctx.lineTo(9, -5); ctx.lineTo(1, -5); ctx.closePath(); ctx.fill();
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(220,240,255,.35)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.ellipse(cx, cy + 1, 15, 4, 0, 0, Math.PI); ctx.stroke();
     } else if (a.kind === 'car') {
       ctx.fillStyle = this.tint(a.col);
       ctx.beginPath(); ctx.ellipse(cx, cy - 4, 9, 4.4, 0, 0, 6.284); ctx.fill();
@@ -1198,8 +1371,14 @@ const Repo = {
     return !(await f.getDoc(f.doc(db, 'usernames', cleanUser(name)))).exists();
   },
   async claimUsername(name, id) {
-    const { db, f } = await loadFirebase();
-    try { await f.setDoc(f.doc(db, 'usernames', cleanUser(name)), { uid: id, at: Date.now() }); } catch (e) { }
+    try {
+      const { db, f } = await loadFirebase();
+      const ref = f.doc(db, 'usernames', cleanUser(name));
+      const snap = await f.getDoc(ref);
+      if (snap.exists()) return snap.data().uid === id;
+      await f.setDoc(ref, { uid: id, at: Date.now() });
+      return true;
+    } catch (e) { console.warn('username claim failed', e); return false; }
   },
 
   async load(user) {
@@ -1310,8 +1489,18 @@ const Repo = {
     const { db, f } = await loadFirebase();
     const id = [me.uid, toUid].sort().join('_');
     const ref = f.doc(db, 'friendRequests', id);
-    const ex = await f.getDoc(ref);
-    if (ex.exists() && ex.data().status === 'pending') throw new Error('A request between you two is already pending.');
+    // Checking for an existing request is a nicety, not a requirement — if the
+    // read is refused (older rules deny reads of documents that do not exist
+    // yet) we simply carry on and send.
+    try {
+      const ex = await f.getDoc(ref);
+      if (ex.exists() && ex.data().status === 'pending') {
+        throw new Error('A request between you two is already pending.');
+      }
+    } catch (err) {
+      if (String(err && err.message).includes('already pending')) throw err;
+      console.warn('duplicate-request check skipped', err);
+    }
     await f.setDoc(ref, {
       id, fromUid: me.uid, fromUsername: me.username, fromName: me.name,
       toUid, toUsername: toName, status: 'pending', at: Date.now(), participants: [me.uid, toUid]
@@ -1389,7 +1578,7 @@ function publicOf(p, st, e, weekMin, weekXp) {
     minutes: st.minutes, streak: st.streak, longest: st.longest, th: e.th,
     empireLevel: e.level, empireXp: e.xp, pop: e.pop,
     buildingCount: e.buildings.filter((b) => !b.building).length,
-    condition: e.condition, weekMin, weekXp, at: Date.now()
+    condition: e.condition, terrain: e.terrain || 'valley', weekMin, weekXp, at: Date.now()
   };
 }
 /* =========================================================== app state === */
@@ -1406,7 +1595,10 @@ const ACTIVE_KEY = 'studyempire:active';
 function saveActive() {
   try { S.active ? localStorage.setItem(ACTIVE_KEY, JSON.stringify(S.active)) : localStorage.removeItem(ACTIVE_KEY); } catch (e) { }
 }
-try { const r = localStorage.getItem(ACTIVE_KEY); if (r) { S.active = JSON.parse(r); S.active.running = false; } } catch (e) { }
+try {
+  const r = localStorage.getItem(ACTIVE_KEY);
+  if (r) { S.active = JSON.parse(r); if (S.active.running && !S.active.lastAt) S.active.lastAt = Date.now(); }
+} catch (e) { }
 
 function toast(msg) {
   S.toast = msg;
@@ -1477,6 +1669,7 @@ async function boot() {
       recompute(S.empire);
       refreshQuests();
       render();
+      if (Repo.online) Repo.claimUsername(S.profile.username, S.profile.uid);
       if (streakReset) Repo.save(S.profile.uid, 'stats', S.stats);
       if (ticked) Repo.save(S.profile.uid, 'empire', S.empire);
       Repo.save(S.profile.uid, 'quests', S.quests);
@@ -1505,14 +1698,33 @@ async function loadVisit(id) {
   render();
 }
 
-/* ------------------------------------------------------------- 1s ticker */
-setInterval(() => {
+/* --------------------------------------------------- wall-clock ticker ---
+   Counts elapsed real time rather than ticks, so the timer keeps running
+   while the phone is locked, the app is backgrounded, or you are in YouTube.
+   A single catch-up is capped at 3 hours so a forgotten session cannot
+   silently claim a whole day. */
+const MAX_CATCHUP_SEC = 3 * 3600;
+function advanceTimer() {
   const a = S.active;
-  if (!a || !a.running) return;
-  if (a.onBreak) a.breakSec++; else a.sec++;
+  if (!a || !a.running) return false;
+  const now = Date.now();
+  if (!a.lastAt) { a.lastAt = now; return false; }
+  let delta = (now - a.lastAt) / 1000;
+  a.lastAt = now;
+  if (delta <= 0) return false;
+  if (delta > MAX_CATCHUP_SEC) delta = MAX_CATCHUP_SEC;
+  if (a.onBreak) a.breakSec += delta; else a.sec += delta;
   saveActive();
-  if (S.route.name === 'focus' && !S.sheet) updateClock();
+  return true;
+}
+setInterval(() => {
+  if (advanceTimer() && S.route.name === 'focus' && !S.sheet) updateClock();
 }, 1000);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) return;
+  if (advanceTimer() && S.route.name === 'focus') updateClock();
+});
+window.addEventListener('focus', () => { if (advanceTimer()) updateClock(); });
 
 function updateClock() {
   const a = S.active; if (!a) return;
@@ -1544,7 +1756,7 @@ function startSession(subjectId, topicId, planned, blockId) {
   S.active = {
     subjectId, subjectName: sub.name, topicId: topic ? topic.id : null,
     topicName: topic ? topic.name : null, planned, blockId: blockId || null,
-    startedAt: Date.now(), sec: 0, breakSec: 0, breaks: 0, running: true, onBreak: false
+    startedAt: Date.now(), lastAt: Date.now(), sec: 0, breakSec: 0, breaks: 0, running: true, onBreak: false
   };
   S.reward = null;
   saveActive();
@@ -1552,6 +1764,7 @@ function startSession(subjectId, topicId, planned, blockId) {
 }
 
 async function finishSession(outcome) {
+  advanceTimer();
   const a = S.active;
   S.sheet = null;
   if (!a) return;
@@ -1650,7 +1863,7 @@ const A = {
   /* ---- subjects ---- */
   pickPreset(d) {
     const p = PRESETS[Number(d.i)];
-    const n = $('#sub-name'); if (n) n.value = p[0];
+    S.sheet.f_subname = p[0];
     S.sheet.icon = p[1]; render();
   },
   pickIcon(d) { S.sheet.icon = d.v; render(); },
@@ -1717,10 +1930,10 @@ const A = {
   },
   pickMin(d) { S.focusMin = Number(d.v); render(); },
   subjChange() { render(); },
-  pause() { S.active.running = false; saveActive(); render(); },
-  resume() { S.active.running = true; saveActive(); render(); },
-  breakStart() { S.active.onBreak = true; S.active.running = true; S.active.breaks++; saveActive(); render(); },
-  breakEnd() { S.active.onBreak = false; S.active.running = true; saveActive(); render(); },
+  pause() { advanceTimer(); S.active.running = false; saveActive(); render(); },
+  resume() { S.active.running = true; S.active.lastAt = Date.now(); saveActive(); render(); },
+  breakStart() { advanceTimer(); S.active.onBreak = true; S.active.running = true; S.active.lastAt = Date.now(); S.active.breaks++; saveActive(); render(); },
+  breakEnd() { advanceTimer(); S.active.onBreak = false; S.active.running = true; S.active.lastAt = Date.now(); saveActive(); render(); },
   cancel() { S.active = null; saveActive(); go('home'); },
   finishYes() { finishSession('completed'); },
   finishPartial() { finishSession('partial'); },
@@ -1787,6 +2000,12 @@ const A = {
     S.sheet = null; render();
     await save('empire', S.empire);
   },
+  async setTerrain(d) {
+    S.empire.terrain = d.v;
+    render();
+    await save('empire', S.empire);
+    publishMe();
+  },
   async clearFocus() {
     S.empire.focus = null; render();
     await save('empire', S.empire);
@@ -1807,16 +2026,17 @@ const A = {
   /* ---- friends ---- */
   metric(d) { S.metric = d.v; render(); },
   async friendAdd() {
-    const name = val('fr-name').trim();
-    if (name.length < 3) return;
+    const name = cleanUser(val('fr-name').replace('@', '').trim());
+    if (name.length < 3) { toast('Type their username — at least 3 characters.'); return; }
+    if (name === S.profile.username) { toast('That is your own friend code.'); return; }
     S.busy = true; render();
     try {
       const t = await Repo.findUser(name);
-      if (!t) throw new Error('No scholar found with that username.');
+      if (!t) throw new Error('Nobody is using @' + name + '. Check the spelling — their exact code is at the top of their own Friends tab.');
       await Repo.sendRequest({ uid: S.profile.uid, username: S.profile.username, name: S.profile.name }, t.uid, t.username);
       S.sheet = null; toast('Request sent to ' + t.name + '.');
       loadSocial();
-    } catch (e) { toast(e.message); }
+    } catch (e) { toast(friendlyDb(e)); }
     S.busy = false; render();
   },
   async respond(d) {
@@ -1848,6 +2068,13 @@ const A = {
     S.phase = 'signedout'; S.profile = null; render();
   }
 };
+function friendlyDb(e) {
+  const m = String((e && e.message) || e || '');
+  if (m.includes('insufficient permissions') || m.includes('permission-denied'))
+    return 'Your database rules have not been published yet — Firebase console, Firestore, Rules tab.';
+  if (m.includes('unavailable') || m.includes('network')) return 'No connection to the database right now.';
+  return m;
+}
 function friendlyAuth(m) {
   m = String(m || '');
   if (m.includes('invalid-credential') || m.includes('wrong-password')) return 'That email and password do not match.';
@@ -2039,12 +2266,14 @@ function viewStudy() {
   else h += '<div class="stack">' + list.map((s) => {
     const dn = s.topics.filter((t) => t.done).length;
     return '<a class="card" href="#/subject/' + s.id + '"><div class="row">' +
-      '<div style="width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:20px;flex:none;background:' + s.color + '22">' + s.icon + '</div>' +
-      '<div class="grow"><div class="sm trunc" style="font-weight:700;color:var(--t)">' + esc(s.name) + '</div>' +
-      '<div class="xs mut">' + s.topics.length + ' topics · ' + dn + ' done</div></div></div>' +
-      '<div style="margin-top:12px">' + bar(dn, Math.max(1, s.topics.length), s.color) + '</div>' +
-      '<div class="row xs mut" style="justify-content:space-between;margin-top:6px">' +
-      '<span>' + fmtMin(s.minutes) + ' studied</span><span>' + s.xp.toLocaleString() + ' XP</span></div></a>';
+      '<div class="thumb" style="background:linear-gradient(145deg,' + s.color + '55,' + s.color + '18)">' + s.icon + '</div>' +
+      '<div class="grow"><div class="trunc" style="font-weight:800;letter-spacing:-.02em;color:var(--t)">' + esc(s.name) + '</div>' +
+      '<div class="xs mut" style="margin-top:2px">' + s.topics.length + ' topics · ' + dn + ' done · ' + fmtMin(s.minutes) + '</div></div>' +
+      '<span class="dim" style="font-size:20px">›</span></div>' +
+      '<div style="margin-top:14px">' + bar(dn, Math.max(1, s.topics.length), s.color) + '</div>' +
+      '<div class="row xs mut" style="justify-content:space-between;margin-top:7px">' +
+      '<span>' + Math.round(clamp(dn / Math.max(1, s.topics.length) * 100, 0, 100)) + '% of topics done</span>' +
+      '<span>' + s.xp.toLocaleString() + ' XP</span></div></a>';
   }).join('') + '</div>';
   return h;
 }
@@ -2055,7 +2284,7 @@ function viewSubject(id) {
   const dn = s.topics.filter((t) => t.done).length;
   let h = '<a class="xs dim" href="#/study">← All subjects</a>' +
     '<div class="card" style="margin-top:10px"><div class="row">' +
-    '<div style="width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:26px;flex:none;background:' + s.color + '22">' + s.icon + '</div>' +
+    '<div class="thumb lgx" style="background:linear-gradient(145deg,' + s.color + '55,' + s.color + '18)">' + s.icon + '</div>' +
     '<div class="grow"><h1 class="trunc">' + esc(s.name) + '</h1>' +
     '<div class="xs mut">' + fmtMin(s.minutes) + ' studied · ' + s.xp.toLocaleString() + ' XP</div></div>' +
     '<button class="btn gho small" data-a="sheet" data-kind="editSubject" data-id="' + s.id + '">Edit</button></div>' +
@@ -2115,7 +2344,7 @@ function viewFocus() {
     const sub = S.subjects.find((s) => s.id === chosen);
     const min = S.focusMin || S.profile.focusMin;
     return '<h1>Start a focus session</h1><div class="card stack" style="margin-top:14px">' +
-      '<div><div class="lab">Subject</div><select id="f-subject" data-c="subjChange" style="margin-top:5px">' +
+      '<div><div class="lab">Subject</div><select id="f-subject" data-keep="fsubject" data-c="subjChange" style="margin-top:5px">' +
       '<option value="">Choose a subject…</option>' +
       subs.map((s) => '<option value="' + s.id + '"' + (chosen === s.id ? ' selected' : '') + '>' + s.icon + ' ' + esc(s.name) + '</option>').join('') +
       '</select></div>' +
@@ -2152,13 +2381,17 @@ function viewEmpire() {
   const nextXp = thXp(e.th + 1), thisXp = thXp(e.th);
   let h = '<div class="city-wrap"><canvas id="city"></canvas>' +
     '<div class="hud top"><div class="box"><div class="sm" style="font-weight:800">' + thTitle(e.th) + '</div>' +
-    '<div class="xs mut">Town Hall ' + e.th + ' · ' + e.pop.toLocaleString() + ' citizens</div></div>' +
+    '<div class="xs mut">Town Hall ' + e.th + ' · ' + e.pop.toLocaleString() + ' citizens</div>' +
+    '<div class="xs" style="color:var(--acc);margin-top:2px">' + WEATHER_LABEL[weatherOf(e.uid)] + ' · ' + seasonOf() + '</div></div>' +
     '<div class="box r"><div class="sm" style="font-weight:800;color:var(--acc)">' + e.points.toLocaleString() + '</div>' +
     '<div class="xs mut">construction points</div></div></div>' +
     '<div class="hud bot"><button class="btn pri small" data-a="sheet" data-kind="catalogue">🏗️ Build</button>' +
     (e.points > 0 && focus ? '<button class="btn gho small" data-a="invest">Invest ' + e.points.toLocaleString() + '</button>' : '<span></span>') +
     '</div></div>' +
-    '<div class="xs dim" style="text-align:center;margin-top:8px">drag to pan · pinch to zoom · tap a building</div>';
+    '<div class="xs dim" style="text-align:center;margin-top:8px">drag to pan · pinch to zoom · tap a building</div>' +
+    '<div class="scroll-x" style="margin-top:12px">' +
+    Object.keys(TERRAINS).map((k) => '<button class="chip ' + ((e.terrain || 'valley') === k ? 'on' : '') +
+      '" data-a="setTerrain" data-v="' + k + '">' + TERRAINS[k].label + '</button>').join('') + '</div>';
 
   h += '<div class="card" style="margin-top:12px"><div class="row" style="justify-content:space-between">' +
     '<div><div class="lab">Next town hall</div><div class="sm" style="font-weight:700">' + thTitle(e.th + 1) + ' at ' + nextXp.toLocaleString() + ' empire XP</div></div>' +
@@ -2330,7 +2563,7 @@ function viewSheet() {
   if (sh.kind === 'newSubject') {
     const icon = sh.icon || '📘';
     return sheetWrap('New subject',
-      '<div class="stack"><div><div class="lab">Name</div><input id="sub-name" placeholder="Digital Signal Processing" style="margin-top:5px"></div>' +
+      '<div class="stack"><div><div class="lab">Name</div><input id="sub-name" data-keep="subname" value="' + esc(keep('subname', '')) + '" placeholder="Digital Signal Processing" style="margin-top:5px"></div>' +
       '<div><div class="lab">Quick picks</div><div class="chips" style="margin-top:6px">' +
       PRESETS.slice(0, 9).map(([n, i], idx) => '<button class="chip" data-a="pickPreset" data-i="' + idx + '">' + i + ' ' + esc(n) + '</button>').join('') + '</div></div>' +
       '<div><div class="lab">Icon</div><div class="chips" style="margin-top:6px">' +
@@ -2359,7 +2592,7 @@ function viewSheet() {
   }
   if (sh.kind === 'newBlock') {
     const kind = sh.kind2 || 'study';
-    const sid = val('bl-subject');
+    const sid = keep('subject', val('bl-subject'));
     const sub = S.subjects.find((s) => s.id === sid);
     const rep = sh.repeat || [];
     return sheetWrap('New schedule block',
@@ -2367,13 +2600,14 @@ function viewSheet() {
       ['study', 'break'].map((k) => '<button class="btn small ' + (kind === k ? 'pri' : '') + '" style="flex:1' +
         (kind === k ? '' : ';background:transparent;color:var(--t2)') + '" data-a="blockKind" data-v="' + k + '">' +
         (k === 'study' ? 'Study' : 'Break') + '</button>').join('') + '</div>' +
-      (kind === 'study' ? '<div><div class="lab">Subject</div><select id="bl-subject" data-c="subjChange" style="margin-top:5px">' +
+      (kind === 'study' ? '<div><div class="lab">Subject</div><select id="bl-subject" data-keep="subject" data-c="subjChange" style="margin-top:5px">' +
         '<option value="">Choose…</option>' + S.subjects.filter((s) => !s.archived).map((s) =>
           '<option value="' + s.id + '"' + (sid === s.id ? ' selected' : '') + '>' + s.icon + ' ' + esc(s.name) + '</option>').join('') + '</select></div>' +
-        (sub && sub.topics.length ? '<div><div class="lab">Topic (optional)</div><select id="bl-topic" style="margin-top:5px">' +
-          '<option value="">No specific topic</option>' + sub.topics.map((t) => '<option value="' + t.id + '">' + esc(t.name) + '</option>').join('') + '</select></div>' : '') : '') +
-      '<div class="grid2"><div><div class="lab">Start</div><input id="bl-time" type="time" value="18:00" style="margin-top:5px"></div>' +
-      '<div><div class="lab">Minutes</div><input id="bl-min" type="number" min="5" step="5" value="60" style="margin-top:5px"></div></div>' +
+        (sub && sub.topics.length ? '<div><div class="lab">Topic (optional)</div><select id="bl-topic" data-keep="topic" style="margin-top:5px">' +
+          '<option value="">No specific topic</option>' + sub.topics.map((t) => '<option value="' + t.id + '"' +
+            (keep('topic', '') === t.id ? ' selected' : '') + '>' + esc(t.name) + '</option>').join('') + '</select></div>' : '') : '') +
+      '<div class="grid2"><div><div class="lab">Start</div><input id="bl-time" data-keep="time" type="time" value="' + keep('time', '18:00') + '" style="margin-top:5px"></div>' +
+      '<div><div class="lab">Minutes</div><input id="bl-min" data-keep="min" type="number" min="5" step="5" value="' + keep('min', '60') + '" style="margin-top:5px"></div></div>' +
       '<div><div class="lab">Repeat weekly on</div><div class="chips" style="margin-top:6px">' +
       DOW.map((d, i) => '<button class="chip ' + (rep.includes(i) ? 'on' : '') + '" style="width:38px;text-align:center;padding:8px 0" data-a="toggleRepeat" data-v="' + i + '">' + d + '</button>').join('') +
       '</div><div class="xs dim" style="margin-top:5px">Leave empty for a one-off block on ' + dayLabel(addDays(toISO(), S.day || 0)).toLowerCase() + '.</div></div>' +
@@ -2386,8 +2620,8 @@ function viewSheet() {
       '<div class="stack"><div><div class="lab">Subject</div><select id="ex-subject" data-c="examSubject" style="margin-top:5px">' +
       '<option value="">Choose…</option>' + S.subjects.map((s) => '<option value="' + s.id + '"' +
         (sh.subject === s.id ? ' selected' : '') + '>' + s.icon + ' ' + esc(s.name) + '</option>').join('') + '</select></div>' +
-      '<div><div class="lab">Exam name</div><input id="ex-name" placeholder="DSP end semester" style="margin-top:5px"></div>' +
-      '<div><div class="lab">Date</div><input id="ex-date" type="date" value="' + addDays(toISO(), 14) + '" style="margin-top:5px"></div>' +
+      '<div><div class="lab">Exam name</div><input id="ex-name" data-keep="exname" value="' + esc(keep('exname', '')) + '" placeholder="DSP end semester" style="margin-top:5px"></div>' +
+      '<div><div class="lab">Date</div><input id="ex-date" data-keep="exdate" type="date" value="' + keep('exdate', addDays(toISO(), 14)) + '" style="margin-top:5px"></div>' +
       (sub && sub.topics.length ? '<div><div class="lab">Topics in scope</div><div class="chips" style="margin-top:6px">' +
         sub.topics.map((t) => '<button class="chip ' + (picked.includes(t.id) ? 'on' : '') + '" data-a="toggleExamTopic" data-v="' + t.id + '">' + esc(t.name) + '</button>').join('') + '</div></div>' : '') +
       '<button class="btn pri full" data-a="examCreate">Track this exam</button></div>');
@@ -2469,7 +2703,21 @@ function viewReward() {
 const NAV = [['home', '🏠', 'Home'], ['study', '📚', 'Study'], ['schedule', '🗓️', 'Schedule'],
 ['empire', '🏙️', 'Empire'], ['friends', '👥', 'Friends']];
 
+/* A sheet re-renders whenever a dropdown inside it changes. Snapshot every
+   field first so the time you typed does not snap back to its default. */
+function captureSheet() {
+  if (!S.sheet) return;
+  document.querySelectorAll('.sheet [data-keep]').forEach((el) => {
+    S.sheet['f_' + el.dataset.keep] = el.value;
+  });
+}
+const keep = (name, fallback) => {
+  const v = S.sheet && S.sheet['f_' + name];
+  return v === undefined || v === '' ? fallback : v;
+};
+
 function render() {
+  captureSheet();
   const root = $('#app');
   if (S.phase === 'loading') { root.innerHTML = '<div class="spin"></div>'; return; }
   if (S.phase === 'signedout') { root.innerHTML = viewAuth(); return; }
@@ -2511,10 +2759,13 @@ function mountCity() {
   if (S.route.name === 'empire') src = S.empire;
   else if (S.route.name === 'visit' && S.visit && S.visit.city) {
     const c = S.visit.city;
-    src = { uid: c.uid, th: c.th, buildings: c.buildings || [] };
+    src = { uid: c.uid, th: c.th, buildings: c.buildings || [], terrain: c.terrain || 'valley' };
   }
   if (!src) return;
-  const state = { seed: src.uid, grid: thGrid(src.th), th: src.th, buildings: src.buildings };
+  const state = {
+    seed: src.uid, grid: thGrid(src.th), th: src.th,
+    buildings: src.buildings, terrain: src.terrain || 'valley'
+  };
   if (cityView && cityView.c === canvas) { cityView.setState(state); return; }
   const oldCam = cityView && cityView.state.seed === state.seed ? cityView.cam : null;
   if (cityView) cityView.stop();
